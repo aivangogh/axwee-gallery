@@ -1,0 +1,38 @@
+<% if(locals.errors){ %>
+  <% errors.forEach(function(error) { %>
+    <!-- <div class="alert alert-dismissible fade show alert-warning" role="alert" data-mdb-color="warning" id="customxD">
+  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+  <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
+</div> -->
+    <div class="justify-content-center">
+      <div class="alert alert-warning alert-dismissible fade show py-3" data-mdb-color="warning" role="alert">
+        <%= error.msg %>
+          <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+    <% }); %>
+      <% } %>
+        <% if(success_msg !='' ){ %>
+          <div class="justify-content-center">
+            <div class="alert alert-success alert-dismissible fade show py-3" data-mdb-color="warning" role="alert">
+              <%= success_msg %>
+                <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
+            </div>
+          </div>
+          <% } %>
+            <% if(error_msg !='' ){ %>
+              <div class="justify-content-center">
+                <div class="alert alert-danger alert-dismissible fade show py-3" data-mdb-color="warning" role="alert">
+                  <%= error_msg %>
+                    <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
+                </div>
+              </div>
+              <% } %>
+                <% if(error !='' ){ %>
+                  <div class="justify-content-center">
+                    <div class="alert alert-danger alert-dismissible fade show py-3" role="alert">
+                      <%= error %>
+                        <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                  </div>
+                  <% } %>

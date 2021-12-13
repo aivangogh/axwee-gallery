@@ -1,0 +1,59 @@
+<% title="Edit Info" %>
+    <div class="container py-5 h-100">
+        <div class="row mt-5">
+            <div class="col-md-6 m-auto">
+
+                <!--Card content-->
+                <div class="card-body px-lg-5 pt-0">
+                    <!-- Display error messeges -->
+                    <%- include('partials/messeges.ejs') %>
+                        <!-- Form -->
+                        <form action="/api/user/update-info/<%- user._id %>" method="POST"
+                            class="bg-white rounded shadow-5-strong px-5 py-5">
+                            <h1 class="info-color white-text text-center pb-2"><strong>Personal Info</strong>
+                            </h1>
+                            <div class="d-flex row pb-3 mb-4 gx-3">
+                                <div class="col">
+                                    <div class="form-outline">
+                                        <input type="name" id="firstName" name="firstName" class="form-control"
+                                            value="<%= typeof user.firstName != 'undefined' ? user.firstName : '' %>" />
+                                        <label class="form-label" for="lastName">First Name <span
+                                                class="form-required">*</span></label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-outline">
+                                        <input type="name" id="lastName" name="lastName" class="form-control"
+                                            value="<%= typeof user.lastName != 'undefined' ? user.lastName : '' %>" />
+                                        <label class="form-label" for="lastName">Last Name <span
+                                                class="form-required">*</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <input type="email" id="email" name="email" class="form-control"
+                                    value="<%= typeof user.email != 'undefined' ? user.email : '' %>" />
+                                <label class="form-label" for="email">Email <span class="form-required">*</span></label>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <input type="text" id="phone" name="phone" class="form-control"
+                                    value="<%= typeof user.phone != 'undefined' ? user.phone : '' %>" />
+                                <label class="form-label" for="phone">Phone</label>
+                            </div>
+
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary btn-rounded btn-block">Update Profle</button>
+
+                            <!-- Back to settings -->
+                            <div class="text-center mt-3">
+                                <a href="/settings"> Back to settings</a>
+                            </div>
+                        </form>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    </div>

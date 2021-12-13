@@ -1,0 +1,80 @@
+<% title="Edit Info" %>
+  <div class="container py-5">
+    <div class="row mt-5  h-100">
+      <div class="col-md-6 m-auto">
+
+        <!--Card content-->
+        <div class="card-body px-lg-5 pt-0">
+          <!-- Display error messeges -->
+          <%- include('partials/messeges.ejs') %>
+            <!-- Form -->
+            <form action="/auth/register" method="POST" class="bg-white rounded shadow-5-strong px-5 py-4">
+              <h1 class="info-color white-text text-center pb-3"><strong>Register</strong>
+              </h1>
+              <div class="d-flex row pb-3 mb-4 gx-3">
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="name" id="firstName" name="firstName" class="form-control"
+                      value="<%= typeof firstName != 'undefined' ? firstName : '' %>" />
+                    <label class="form-label" for="lastName">First Name <span class="form-required">*</span></label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-outline">
+                    <input type="name" id="lastName" name="lastName" class="form-control"
+                      value="<%= typeof lastName != 'undefined' ? lastName : '' %>" />
+                    <label class="form-label" for="lastName">Last Name <span class="form-required">*</span></label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-outline mb-4">
+                <input type="name" id="username" name="username" class="form-control"
+                  value="<%= typeof username != 'undefined' ? username : '' %>" />
+                <label class="form-label" for="username">Username <span class="form-required">*</span></label>
+              </div>
+              <div class="form-outline mb-4">
+                <input type="email" id="email" name="email" class="form-control"
+                  value="<%= typeof email != 'undefined' ? email : '' %>" />
+                <label class="form-label" for="email">Email <span class="form-required">*</span></label>
+              </div>
+              <div class="form-outline mb-4">
+                <input type="text" id="phone" name="phone" class="form-control"
+                  value="<%= typeof phone != 'undefined' ? phone : '' %>" />
+                <label class="form-label" for="phone">Phone</label>
+              </div>
+              <div class=" d-flex row pt-3 mb-2 gx-3">
+                <div class="col">
+                  <div class="form-outline mb-4">
+                    <input type="password" id="password" name="password" class="form-control"
+                      value="<%= typeof password != 'undefined' ? password : '' %>" />
+                    <label class="form-label" for="password">Password <span class="form-required">*</span></label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-outline mb-4">
+                    <input type="password" name="confirmPassword" class="form-control"
+                      value="<%= typeof confirmPassword != 'undefined' ? confirmPassword : '' %>" />
+                    <label class="form-label" for="confirmPassword">Confirm Password <span
+                        class="form-required">*</span></label>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- Submit button -->
+              <button type="submit" class="btn btn-primary btn-rounded btn-block">Register</button>
+              <div class="mt-5 text-center">
+                <!-- Register -->
+                <p>Have An Account?
+                  <a href="/login">Login</a>
+                </p>
+              </div>
+            </form>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  </div>

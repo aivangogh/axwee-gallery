@@ -1,7 +1,7 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+const path = require('path');
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
@@ -14,13 +14,15 @@ const app = express();
 require('dotenv').config();
 
 // Passport Config
-require('./config/passport')(passport);
+require('./src/config/passport')(passport);
 
 // Connection for database
-require('./config/database');
+require('./src/config/database');
 
 // EJS
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressLayouts);
+app.set('views', path.join(__dirname, './src/views'));
 app.set('view engine', 'ejs');
 
 // Express body parser
@@ -28,7 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Sessions
 const sessionStore = new MongoStore({
-  mongoUrl: process.env.MONGODB_STRING,
+  mongoUrl: process.env.MONGODB_URL,
   collection: 'sessions',
 });
 
@@ -57,6 +59,8 @@ app.use(flash());
 
 // Global variables
 app.use(function (req, res, next) {
+  res.locals.session = req.session;
+  res.locals.files = req.files;
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
@@ -64,9 +68,9 @@ app.use(function (req, res, next) {
 });
 
 // Routes
-app.use('/', require('./routes/index'));
-app.use('/api/', require('./routes/api'));
-app.use('/auth/', require('./routes/auth'));
+app.use('/', require('./src/routes/index'));
+app.use('/api', require('./src/routes/api'));
+app.use('/auth', require('./src/routes/auth'));
 
 const PORT = process.env.PORT || 3000;
 

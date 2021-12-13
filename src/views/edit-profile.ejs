@@ -1,0 +1,61 @@
+<% title="Edit Profile" %>
+
+    <div class="container py-5">
+        <div class="row py-5 px-4">
+            <div class="col-md-6 mx-auto">
+                <!-- Profile widget -->
+                <form action="/api/user/update-profile/<%- user._id%>" method="POST"
+                    class="bg-white shadow rounded px-5 py-5">
+                    <h1 class="info-color white-text text-center pb-4"><strong>Edit Profile</strong>
+                    </h1>
+                    <div class="row justify-content-between media pb-4 px-4">
+                        <div class="col">
+
+                        </div>
+                        <div class="col-5">
+                            <img src="<%= user.img.profile %>" width="130"
+                                class="rounded-circle img-thumbnail">
+                        </div>
+                        <div class="col d-flex align-items-end">
+                            <div class="input-group mb-3">
+                                <div class="photo-input">
+                                    <input type="file" id="loadFile" onchange="console.log(this.files[0].name);" />
+                                    <button type="button" class="btn btn-primary btn-sm btn-rounded"
+                                        onclick="document.getElementById('loadFile').click()">Upload photo</button>
+                                </div>
+                                <!-- <input type="file" class="form-control" id="change-profile-picture">
+                                <label class="input-group-text" for="change-profile-picture">Upload</label> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex row">
+                        <div class="col d-flex flex-column justify-content-end text-white mx-4">
+                            <div class="input-group form-outline mt-2">
+                                <span class="input-group-text">@</span>
+                                <input type="name" id="username" name="username" class="form-control"
+                                    value="<%= typeof user.username != 'undefined' ? user.username : '' %>" />
+                                <label class="form-label" for="username">Username</label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="px-4 pt-3 form-outline">
+                        <h6 class="mb-1 pt-2 text-center"><em>Bio</em></h6>
+                        <div class="form-outline">
+                            <textarea class="form-control" id="validationTextarea" placeholder="Bio" name="bio"
+                                style="resize: none; height: 75px;"
+                                required><%= typeof user.bio !='undefined' ? user.bio : '' %></textarea>
+
+                        </div>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-rounded btn-block mt-5">Save Changes</button>
+                    <!-- Back to Profile -->
+                    <div class="text-center mt-3">
+                        <a href="/profile">Back to Profile</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

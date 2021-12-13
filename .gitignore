@@ -4,5 +4,5 @@
 # Environment Variable
 .env
 
-# Testing (Jest)
-/test
+# Ignore files in public/uploads
+./public/uploads/*

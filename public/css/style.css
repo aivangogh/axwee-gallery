@@ -1,0 +1,158 @@
+:root {
+  --profile-picture-size: 150px;
+}
+
+body {
+  height: 100vh;
+}
+
+.form-required {
+  color: red;
+}
+
+/* PROFILE PAGE */
+
+.profile-head img {
+  width: var(--profile-picture-size);
+  height: var(--profile-picture-size);
+}
+
+.profile-head {
+  transform: translateY(-50%);
+}
+
+.user-info {
+  transform: translateY(-100%);
+}
+
+.user-bio {
+  transform: translateY(-100%);
+}
+
+.recent-post {
+  transform: translateY(-25%);
+}
+
+.cover {
+  background-image: url(https://images.unsplash.com/photo-1530305408560-82d13781b33a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 200px;
+}
+
+.post-iamge {
+  background-image: url(https://images.unsplash.com/photo-1530305408560-82d13781b33a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 200px;
+}
+
+.edit-profile {
+  z-index: 100;
+}
+
+.profile-body {
+  /* background: #654ea3;
+    background: linear-gradient(to right, #e96443, #904e95); */
+
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.login-container {
+  min-height: 90vh;
+  padding-top: 3em;
+  overflow: hidden;
+}
+
+.top-margin {
+  min-height: 100vh;
+  padding-top: 3em;
+  overflow: hidden;
+}
+
+.modal-header > .modal-title {
+  font-size: 14px;
+}
+
+.modal-body > .body-desc {
+  font-size: 14px;
+}
+
+.modal-footer > .footer-title {
+  font-size: 12px;
+}
+
+#loadFile {
+  display: none;
+}
+
+.modal-header > .modal-title,
+.modal-body > .body-desc,
+.modal-body > .photo-input,
+.modal-footer > .footer-title {
+  text-align: center;
+}
+
+/* Overlay for profile picture in edit profile */
+.profile-picture-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+.img-thumbnail {
+  width: 100%;
+  height: auto;
+}
+
+/* The overlay effect (full height and width) - lays on top of the container and over the image */
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: auto;
+  width: 100%;
+  opacity: 0;
+  transition: 0.3s ease;
+  background-color: red;
+}
+
+/* When you mouse over the container, fade in the overlay icon*/
+.container:hover .overlay {
+  opacity: 1;
+}
+
+/*  Gallery */
+.gallery-container {
+  padding: 7rem 0;
+}
+
+hr {
+  border: 0;
+  height: 3px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.thumbnail {
+  margin-bottom: 6px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.blur {
+  transform: scale(0.9);
+  opacity: 0.6;
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+}

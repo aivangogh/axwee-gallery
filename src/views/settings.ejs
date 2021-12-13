@@ -1,0 +1,41 @@
+<% title="Settings" %>
+
+    <div class="container my-5 py-5">
+        <div class="row d-flex align-items-center justify-content-center">
+            <h1>Settings</h1>
+            <div class="row mt-5">
+                <div class="col-3">
+                    <div class="list-group" id="list-tab" role="tablist">
+                        <a class="list-group-item list-group-item-action active" id="list-persoala-info-list"
+                            data-mdb-toggle="list" href="#list-personal-info" role="tab">Personal Information</a>
+                        <a class="list-group-item list-group-item-action" id="list-change-password-list"
+                            data-mdb-toggle="list" href="#list-change-password" role="tab">Change Password</a>
+                        <a class="list-group-item list-group-item-action" id="list-profile-access-and-control-list"
+                            data-mdb-toggle="list" href="#list-profile-access-and-control" role="tab">Profile Access and
+                            Control</a>
+                    </div>
+                </div>
+                <div class="col-8 mx-3">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="list-personal-info" role="tabpanel"
+                            aria-labelledby="list-home-list">
+                            <p>Edit Personal Information</p>
+                            <a href="/edit-info" class="btn btn-primary mt-2" role="button">Edit Personal Info</a>
+                        </div>
+                        <div class="tab-pane fade" id="list-change-password" role="tabpanel"
+                            aria-labelledby="list-messages-list">
+                            <p>Change Password</p>
+                            <a href="/change-password" class="btn btn-primary mt-2" role="button">Edit Password</a>
+                        </div>
+                        <div class="tab-pane fade" id="list-profile-access-and-control" role="tabpanel"
+                            aria-labelledby="list-profile-list">
+                            <p>Delete account permanently</p>
+                            <a href="/api/user/delete/<%- user._id %>" class="btn btn-danger mt-2"
+                                role="button">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>

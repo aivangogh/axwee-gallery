@@ -1,0 +1,44 @@
+<% title="Login" %>
+
+  <div class="container py-5 h-100">
+    <div class="row mt-5  h-100">
+      <div class="col-md-6 m-auto">
+
+        <!--Card content-->
+        <div class="card-body px-lg-5 pt-0">
+          <!-- Display error messeges -->
+          <%- include('partials/messeges.ejs') %>
+            <!-- Form -->
+            <form action="/auth/login" method="POST" class="bg-white rounded shadow-5-strong p-5">
+              <h1 class="info-color white-text text-center pb-4"><strong>Login</strong></h1>
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                <input type="emai" id="email" name="email" class="form-control" />
+                <label class="form-label" for="email">Email</label>
+              </div>
+
+              <!-- Password input -->
+              <div class="form-outline mb-4">
+                <input type="password" id="password" name="password" class="form-control" />
+                <label class="form-label" for="password">Password</label>
+              </div>
+
+              <!-- Submit button -->
+              <button type="submit" class="btn btn-primary btn-rounded btn-block">Login</button>
+
+              <div class="mt-5 text-center">
+                <!-- Register -->
+                <p>Not a member?
+                  <a href="/register">Register</a>
+                </p>
+              </div>
+            </form>
+            <!-- Form -->
+
+        </div>
+
+      </div>
+      <!-- Material form login -->
+    </div>
+
+  </div>

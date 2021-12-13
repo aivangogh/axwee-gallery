@@ -1,0 +1,35 @@
+<% title="Profile" %>
+    <div class="container py-5">
+        <div class="row py-5 px-4">
+            <div class="col-md-6 mx-auto">
+                <!-- Display error messeges -->
+                <%- include('partials/messeges.ejs') %>
+                    <!-- Profile widget -->
+                    <form action="/api/post" method="POST" enctype="multipart/form-data"
+                        class="container bg-white shadow rounded p-5">
+                        <h1 class="info-color white-text text-center mb-4"><strong>New Post</strong>
+                        </h1>
+                        <div class="d-flex row media align-items-end justify-content-start">
+                            <div class="col">
+                                <div class="input-group mb-5">
+                                    <input type="file" class="form-control" name="image" id="change-profile-picture">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Title -->
+                        <div class="form-outline text-white mb-3">
+                            <input type="text" class="form-control" name="title" id="title" required>
+                            <label for="title" class="form-label">Title</label>
+                        </div>
+                        <!-- Caption -->
+                        <div class="form-outline text-white">
+                            <textarea class="form-control" id="caption" name="caption" placeholder="Write a caption..."
+                                style="resize: none; height: 75px;"></textarea>
+                            <label for="caption" class="form-label">Caption</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-rounded btn-block mt-5">Create Post</button>
+                    </form>
+            </div>
+        </div>
+    </div>
