@@ -14,8 +14,8 @@ const UserSchema = new Schema(
       profile: { type: String, default: 'img/avatar2.png' },
       cover: { type: String },
     },
-  },
-  { timestamps: true }
+    createdAt: { type: Date, default: Date.now },
+  }
 );
 
 module.exports = mongoose.model('User', UserSchema);

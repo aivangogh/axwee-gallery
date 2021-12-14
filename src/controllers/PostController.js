@@ -1,17 +1,15 @@
 const Post = require('../models/PostModel');
-const mongoose = require('mongoose');
-const path = require('path');
-const fs = require('fs');
+const User = require('../models/UserModel');
+const { repath } = require('../utils/repath');
 
 // Upload Post
 exports.uploadPost = async (req, res, next) => {
-  console.log(req.file);
-  // console.log(request.body);
-  let post = new Post({
+  const path = repath(req.file.path);
+  const post = new Post({
     title: req.body.title,
-    desc: req.body.caption,
-    author: req.user._id,
-    img: req.file.path,
+    desc: req.body.desc,
+    authorId: req.user._id,
+    img: path,
   });
 
   try {
@@ -35,16 +33,61 @@ exports.uploadPost = async (req, res, next) => {
 
 // Get All Post
 exports.getAllPost = (req, res) => {
-  Post.find({}, (err, items) => {
-    if (err) {
-      console.log(err);
-      res.status(500).send('An error occurred', err);
-    } else {
-      console.log(items);
-      // res.render('/gallery');
-      //   res.render('/gallery', { items: items });
-    }
-  });
+  Post.find()
+    .sort({ createdAt: -1 })
+    .exec((err, post) => {
+      let dbPost = [];
+      if (err) {
+        console.log(err);
+        res.status(500).send('An error occurred', err);
+      } else {
+        post.map((data, err) => {
+          dbPost.push(data.authorId);
+        });
+
+        User.find({ _id: { $in: dbPost } })
+          .then((user) => {
+            res.render('gallery', {
+              user: req.user,
+              post: post,
+              postUser: user,
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    });
+};
+
+// Get All Post
+exports.getFeaturedPost = (req, res) => {
+  Post.find()
+    .sort({ createdAt: -1 })
+    .exec((err, post) => {
+      let dbPost = [];
+      if (err) {
+        console.log(err);
+        res.status(500).send('An error occurred', err);
+      } else {
+        post.map((data, err) => {
+          dbPost.push(data.authorId);
+        });
+
+        User.find({ _id: { $in: dbPost } })
+          .then((user) => {
+            res.locals.session.isLoggedIn = true;
+            res.render('home', {
+              user: req.user,
+              post: post,
+              postUser: user,
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    });
 };
 
 // route that handles edit view

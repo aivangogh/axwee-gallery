@@ -4,48 +4,55 @@
     <div class="container">
         <div class="d-flex flex-fill">
             <!-- Left links -->
-            <div class="container-fluid">
-                <div class="d-flex">
-                    <a class="navbar-brand" href="/"><strong>Axwee Art Gallery</strong></a>
-                    <%if (locals.session.isLoggedIn) { %>
-                        <ul class="d-flex row flex-row navbar-nav me-auto mx-lg-5 mx-sm-3 gx-md-3">
-                            <li class="col nav-item">
-                                <a class="nav-link active" aria-current="page" href="/home">Home</a>
-                            </li>
-                            <li class="col nav-item">
-                                <a class="nav-link" href="/gallery">Gallery</a>
-                            </li>
-                            <li class="col nav-item">
-                                <a class="nav-link" href="/about">About</a>
-                            </li>
-                        </ul>
-                        <% } %>
-                </div>
+            <div class="container-fluid navbar-brand">
+                <img src="img/favicon.ico" style="height: 2rem">
+                <a class="navbar-brand mx-2" href="/"><strong>Axwee Gallery</strong></a>
             </div>
 
             <!-- Right links -->
             <div class="d-flex justify-content-end">
                 <%if (!locals.session.isLoggedIn) { %>
-                    <a class="btn btn-link px-3 me-2" href="/login" role="button">
-                        Login
-                    </a>
-                    <a class="btn btn-primary me-3" href="/register" role="button">
-                        Register
-                    </a>
+                    <div class="navbar-nav">
+                        <a class="btn btn-link p-3 me-3" href="/login" role="button">
+                            Login
+                        </a>
+                        <a class="btn btn-primary p-3 me-3" href="/register" role="button">
+                            Register
+                        </a>
+                    </div>
                     <% } else {%>
                         <div class="container-fluid">
                             <ul class="navbar-nav">
+                                <div class="navbar-nav mx-5">
+                                    <li class="col nav-item">
+                                        <a class="nav-link btn btn-link p-3 me-3 active" aria-current="page"
+                                            href="/home">Home</a>
+                                    </li>
+                                    <li class="col nav-item">
+                                        <a class="nav-link btn btn-link p-3 me-3" href="/gallery">Discover</a>
+                                    </li>
+                                    <li class="col nav-item">
+                                        <a class="nav-link btn btn-link p-3 me-3" href="/about">About</a>
+                                    </li>
+                                </div>
                                 <!-- Avatar -->
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
                                         id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown"
                                         aria-expanded="false">
-                                        <img src="<%= user.img.profile %>" class="rounded-circle" height="30"
-                                            loading="lazy" />
+                                        <div>
+                                            <img src="<%= user.img.profile %>" class="rounded-circle" height="30"
+                                                width="30" style="object-fit: cover;" loading="lazy" />
+                                        </div>
+                                        <div class="text-center mx-2">
+                                            <p class="m-0">
+                                                <lead>Profile</lead>
+                                            </p>
+                                        </div>
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                         <li>
-                                            <a class="dropdown-item" href="/profile">My profile</a>
+                                            <a class="dropdown-item" href="/profile">Profile</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item" href="/settings">Settings</a>
@@ -57,7 +64,6 @@
                                 </li>
                             </ul>
                         </div>
-
                         <% } %>
             </div>
         </div>
@@ -65,4 +71,14 @@
     </div> <!-- Container wrapper -->
 
 </nav>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var url = window.location;
+        $('ul.nav a[href="' + url + '"]').parent().addClass('active');
+        $('ul.nav a').filter(function () {
+            return this.href == url;
+        }).parent().addClass('active');
+    });
+</script>
 <!-- Navbar -->

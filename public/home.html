@@ -173,9 +173,54 @@
     </footer>
     <!--Footer-->
     <!-- MDB -->
-    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- <script type="text/javascript" src="js/mdb.min.js"></script> -->
     <!-- Custom scripts -->
-    <script type="text/javascript" src="js/script.js"></script>
+    <!-- <script type="text/javascript" src="js/script.js"></script> -->
+    <script>
+        let post = [{
+            id: "1",
+            name: "Noting",
+            author: "1"
+        }, {
+
+            id: "2",
+            name: "ADasd",
+            author: "2"
+        },
+        {
+
+            id: "3",
+            name: "asdasqwe",
+            author: "2"
+        },
+        {
+
+            id: "4",
+            name: "asdasqwe",
+            author: "2"
+        },
+        ]
+
+        let user = [{
+            id: "1",
+            name: "Ivan",
+
+        }, {
+
+            id: "2",
+            name: "Karl",
+        },
+        ]
+
+        post.forEach(post => {
+            let ivanCount = 0;
+            let carlCount = 0;
+            if (post.author == 2) {
+                ivanCount++
+                console.log(`Post: ${post.name} - ${post.id}`);
+            }
+        })
+    </script>
 </body>
 
 </html>

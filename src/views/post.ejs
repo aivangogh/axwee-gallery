@@ -1,35 +1,56 @@
 <% title="Profile" %>
-    <div class="container py-5">
-        <div class="row py-5 px-4">
-            <div class="col-md-6 mx-auto">
-                <!-- Display error messeges -->
-                <%- include('partials/messeges.ejs') %>
-                    <!-- Profile widget -->
-                    <form action="/api/post" method="POST" enctype="multipart/form-data"
-                        class="container bg-white shadow rounded p-5">
-                        <h1 class="info-color white-text text-center mb-4"><strong>New Post</strong>
-                        </h1>
-                        <div class="d-flex row media align-items-end justify-content-start">
-                            <div class="col">
-                                <div class="input-group mb-5">
-                                    <input type="file" class="form-control" name="image" id="change-profile-picture">
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Title -->
-                        <div class="form-outline text-white mb-3">
-                            <input type="text" class="form-control" name="title" id="title" required>
-                            <label for="title" class="form-label">Title</label>
-                        </div>
-                        <!-- Caption -->
-                        <div class="form-outline text-white">
-                            <textarea class="form-control" id="caption" name="caption" placeholder="Write a caption..."
-                                style="resize: none; height: 75px;"></textarea>
-                            <label for="caption" class="form-label">Caption</label>
-                        </div>
+    <div class="container py-5 h-100">
 
-                        <button type="submit" class="btn btn-primary btn-rounded btn-block mt-5">Create Post</button>
-                    </form>
+        <form action=" /api/post" method="POST" class="row py-5 g-5" enctype="multipart/form-data">
+            <div class="col-8">
+                <div class="col mb-4 bg-white rounded">
+                    <img class="" id="imagePreview" src="img/no-thumbnail.png" height="350px" width="100%"
+                        style="object-fit: cover;" />
+                </div>
+                <div class="d-flex flex-column row media align-items-end justify-content-start">
+                    <div class="col">
+                        <div class="input-group mb-5">
+                            <div class="photo-input">
+                                <input type="file" id="post" name="post" style="display:none" />
+                                <button type="button" class="btn btn-primary btn-rounded"
+                                    onclick="document.getElementById('post').click()">Select photo</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+            <div class="col-4 ">
+                <div class="container bg-white shadow rounded p-5">
+                    <h1 class="info-color white-text text-center mb-5"><strong>New Post</strong>
+                    </h1>
+
+                    <!-- Title -->
+                    <div class="form-outline text-white mb-3">
+                        <input type="text" class="form-control" name="title" id="title" required>
+                        <label for="title" class="form-label">Title</label>
+                    </div>
+                    <!-- Caption -->
+                    <div class="form-outline text-white">
+                        <textarea class="form-control" id="caption" name="caption" placeholder="Write a caption..."
+                            style="resize: none; height: 75px;"></textarea>
+                        <label for="caption" class="form-label">Caption</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-rounded btn-block mt-5">Create Post</button>
+                </div>
+            </div>
+        </form>
+
     </div>
+
+
+    <script>
+        // To preview upload image
+        post.onchange = evt => {
+            const [file] = post.files
+            if (file) {
+                imagePreview.src = URL.createObjectURL(file)
+            }
+        }
+    </script>

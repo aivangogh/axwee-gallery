@@ -4,6 +4,7 @@
 
 body {
   height: 100vh;
+  background-color: #f5f5f5;
 }
 
 .form-required {
@@ -11,11 +12,6 @@ body {
 }
 
 /* PROFILE PAGE */
-
-.profile-head img {
-  width: var(--profile-picture-size);
-  height: var(--profile-picture-size);
-}
 
 .profile-head {
   transform: translateY(-50%);
@@ -71,29 +67,6 @@ body {
   overflow: hidden;
 }
 
-.modal-header > .modal-title {
-  font-size: 14px;
-}
-
-.modal-body > .body-desc {
-  font-size: 14px;
-}
-
-.modal-footer > .footer-title {
-  font-size: 12px;
-}
-
-#loadFile {
-  display: none;
-}
-
-.modal-header > .modal-title,
-.modal-body > .body-desc,
-.modal-body > .photo-input,
-.modal-footer > .footer-title {
-  text-align: center;
-}
-
 /* Overlay for profile picture in edit profile */
 .profile-picture-container {
   position: relative;
@@ -126,6 +99,16 @@ body {
 }
 
 /*  Gallery */
+
+.post img {
+  cursor: pointer;
+}
+
+.post img:hover {
+  opacity: 0.7;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .gallery-container {
   padding: 7rem 0;
 }

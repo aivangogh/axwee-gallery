@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const postSchema = new Schema({
   title: { type: String, required: true },
   desc: { type: String },
-  author: { type: mongoose.Schema.Types.ObjectId, ref: 'UserModel' },
+  authorId: { type: mongoose.Schema.Types.ObjectId, ref: 'UserModel' },
   img: { type: String },
   createdAt: { type: Date, default: Date.now },
 });

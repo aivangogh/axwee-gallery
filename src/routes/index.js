@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
+const UserController = require('../controllers/UserController');
+const PostController = require('../controllers/PostController');
 
 // Welcome Page
 router.get('/', forwardAuthenticated, (req, res) => {
@@ -11,13 +13,7 @@ router.get('/', forwardAuthenticated, (req, res) => {
 });
 
 // Dashboard
-router.get('/home', ensureAuthenticated, (req, res) => {
-  console.log(req.user.img.profile);
-  res.locals.session.isLoggedIn = true;
-  res.render('home', {
-    user: req.user,
-  });
-});
+router.get('/home', ensureAuthenticated, PostController.getFeaturedPost);
 
 // Login Page
 router.get('/login', forwardAuthenticated, (req, res) => {
@@ -32,18 +28,10 @@ router.get('/register', forwardAuthenticated, (req, res) => {
 });
 
 // Profile
-router.get('/profile', ensureAuthenticated, (req, res) => {
-  res.render('profile', {
-    user: req.user,
-  });
-});
+router.get('/profile', ensureAuthenticated, UserController.getAllUserPost);
 
 // Gallery
-router.get('/gallery', ensureAuthenticated, (req, res) => {
-  res.render('gallery', {
-    user: req.user,
-  });
-});
+router.get('/gallery', ensureAuthenticated, PostController.getAllPost);
 
 // About
 router.get('/about', ensureAuthenticated, (req, res) => {

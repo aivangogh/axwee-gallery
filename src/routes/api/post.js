@@ -1,15 +1,14 @@
 const express = require('express');
-const router = express.Router();
-const upload = require('../../middlewares/upload');
+const upload = require('../../middlewares/uploadPost');
 const PostController = require('../../controllers/PostController');
-const { setDestination } = require('../../helpers/uploadDest');
 
-setDestination('./public/uploads');
+const router = express.Router();
+
 // Upload Post
-router.post('/', upload.single('image'), PostController.uploadPost);
+router.post('/', upload.single('post'), PostController.uploadPost);
 
 // Get all image
-router.get('/all', PostController.getAllPost);
+router.get('/', PostController.getAllPost);
 
 // Get file
 router.get('/:postId', PostController.getPost);

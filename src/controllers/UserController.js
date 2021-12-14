@@ -1,6 +1,7 @@
-const db = require('../config/database');
-const apiResponse = require('../helpers/authResponse');
 const User = require('../models/UserModel');
+const Post = require('../models/PostModel');
+const apiResponse = require('../helpers/authResponse');
+const { repath } = require('../utils/repath');
 
 // Get all user
 exports.getAllUser = (req, res) => {
@@ -30,6 +31,36 @@ exports.getUser = (req, res) => {
   } catch (error) {
     return apiResponse.ErrorResponse(res, error.message);
   }
+};
+
+// Get All User Post
+exports.getAllUserPost = (req, res) => {
+  Post.find()
+    .sort({ createdAt: -1 })
+    .exec((err, post) => {
+      let dbPost = [];
+      if (err) {
+        console.log(err);
+        res.status(500).send('An error occurred', err);
+      } else {
+        console.log(post);
+        post.map((data, err) => {
+          dbPost.push(data.authorId);
+        });
+
+        User.find({ _id: { $in: dbPost } })
+          .then((user) => {
+            res.render('profile', {
+              user: req.user,
+              post: post,
+              postUser: user,
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    });
 };
 
 // Create new user
@@ -64,11 +95,11 @@ exports.createUser = (req, res) => {
 
 // Update user profile
 exports.updateUserProfile = (req, res, next) => {
-  console.log(req.file);
+  const path = repath(req.file.path);
   const user = {
     username: req.body.username,
     bio: req.body.bio,
-    profile: req.file.path,
+    img: { profile: path },
   };
 
   try {
