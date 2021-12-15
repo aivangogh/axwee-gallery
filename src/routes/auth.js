@@ -1,13 +1,8 @@
 const express = require('express');
-const router = express.Router();
-
 const AuthController = require('../controllers/AuthController');
-const UserController = require('../controllers/UserController');
-
 const Validator = require('../middlewares/validator');
 
-// Load Authertication Redirection
-const { forwardAuthenticated } = require('../config/auth');
+const router = express.Router();
 
 // Login
 router.post('/login', AuthController.login);

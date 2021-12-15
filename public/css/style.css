@@ -98,6 +98,12 @@ body {
   opacity: 1;
 }
 
+/* home */
+
+.carousel-container {
+  background: linear-gradient(top, rgba(255, 255, 255, 0), rgba(0, 0, 0, 1));
+}
+
 /*  Gallery */
 
 .post img {

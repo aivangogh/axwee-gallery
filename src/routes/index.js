@@ -1,11 +1,11 @@
 const express = require('express');
-const router = express.Router();
-const passport = require('passport');
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 const UserController = require('../controllers/UserController');
 const PostController = require('../controllers/PostController');
 
-// Welcome Page
+const router = express.Router();
+
+// Root route
 router.get('/', forwardAuthenticated, (req, res) => {
   res.render('login', {
     user: req.user,

@@ -18,27 +18,31 @@
 
                         <!-- Inner -->
                         <div class="carousel-inner">
-                            <% for (let i=0; i !=2; i++) {%>
+                            <% post.forEach((post)=> { %>
                                 <!-- Single item -->
                                 <div class="carousel-item active">
-                                    <img src="<%- post[i].img %>" class="d-block w-100" alt="<%- post.title %>"
+                                    <img src="<%- post.img %>" class="d-block w-100" alt="<%- post.title %>"
                                         style="height: 25rem; object-fit: cover;" />
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>
-                                            <%- post[i].title %>
+                                            <%- post.title %>
                                         </h5>
                                         <p>
-                                            <% for (let j=0; j !=2; j++) {%>
-                                                <% let userId=JSON.stringify(postUser[j]._id) %>
-                                                    <% let authorId=JSON.stringify(post[i].authorId) %>
-                                                        <% if(userId==authorId) {%>
-                                                            <%- `${postUser.firstName} ${postUser.lastName}` %>
-                                                                <% }%>
-                                                                    <%} %>
+                                            <% postUser.forEach(user=> {%>
+                                                <% let userId=JSON.stringify(user._id),
+                                                    authorId=JSON.stringify(post.authorId) %>
+                                                    <% if(userId==authorId) {%>
+                                                        <p><small>by&nbsp;</small></em>
+                                                            <strong>
+                                                                <%- `${user.firstName} ${user.lastName}` %>
+                                                            </strong>
+                                                        </p>
+                                                        <% }%>
+                                                            <%}) %>
                                         </p>
                                     </div>
                                 </div>
-                                <% } %>
+                                <% }) %>
 
                         </div>
                         <!-- Inner -->

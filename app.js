@@ -19,6 +19,9 @@ require('./src/config/passport')(passport);
 // Connection for database
 require('./src/config/database');
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 // EJS
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressLayouts);

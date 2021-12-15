@@ -8,7 +8,7 @@
           <!-- Display error messeges -->
           <%- include('partials/messeges.ejs') %>
             <!-- Form -->
-            <form action="/auth/register" method="POST" class="bg-white rounded shadow-5-strong px-5 py-4">
+            <form action="/auth/register" method="POST" id="form" class="bg-white rounded shadow-5-strong px-5 py-4">
               <h1 class="info-color white-text text-center pb-3"><strong>Register</strong>
               </h1>
               <div class="d-flex row pb-3 mb-4 gx-3">
@@ -60,11 +60,20 @@
                 </div>
               </div>
 
+              <!-- div to show reCAPTCHA -->
+              <div class="pb-4 d-flex align-items-center justify-content-center">
+                <div class="g-recaptcha" data-sitekey="6Lf7n6QdAAAAANEspkZq50XVTGe-_uc0hHnLU4bw"
+                  data-size="compact normal">
+                </div>
 
+              </div>
+              <p class="px-3 mb-3" style="font-size: 14px;"><small>By click Sign Up, you agree to our Terms and that you
+                  have reade <span class="text-primary">Data Use Policy</span>,
+                  including out <span class="text-primary">Cookie Use.</span></small></p>
               <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-rounded btn-block">Register</button>
+              <button type="submit" class="btn btn-primary btn-rounded btn-block">Sign Up</button>
               <div class="mt-5 text-center">
-                <!-- Register -->
+                <!-- Login -->
                 <p>Have An Account?
                   <a href="/login">Login</a>
                 </p>
@@ -72,9 +81,9 @@
             </form>
 
         </div>
-
-
       </div>
     </div>
   </div>
-  </div>
+
+  <!-- Google reCAPTCHA CDN -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
