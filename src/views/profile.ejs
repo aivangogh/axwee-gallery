@@ -1,47 +1,55 @@
 <% title="Profile" %>
-    <div class="container py-5">
+    <div class="container-fluid py-5 px-3">
         <div class="row py-5 px-4">
             <div class="col-md-10 mx-auto">
                 <!-- Profile widget -->
-                <div class="bg-white shadow rounded overflow-hidden">
-                    <div class="d-flex align-items-end px-4 pb-4 cover">
-                        <div class="edit-profile">
-                            <a class="btn btn-primary btn-sm" href="/edit-profile" role="button">Edit profile</a>
+
+                <div class="row">
+                    <div class="col-5 shadow py-5 px-4 rounded">
+
+                        <div class="d-flex row align-items-center justify-content-center">
+                            <div class="col">
+                                <!-- To make the profile center. 3 col needed -->
+                            </div>
+                            <div class="col-5">
+                                <img src="<%= user.img.profile %>" height="150" width="150" style="object-fit: cover;"
+                                    class="rounded-circle border border-5 border-white">
+                            </div>
+                            <div class="col edit-profile">
+                                <a class="btn btn-primary btn-sm btn-rounded" href="/edit-profile" role="button">Edit
+                                    profile</a>
+                            </div>
+
+                        </div>
+                        <div class="d-flex row user-info text-center mt-3">
+                            <div class="col d-flex flex-column justify-content-end media-body text-white mx-4 mb-2">
+                                <h4 class="text-dark mb-2">
+                                    <%- user.firstName%>
+                                        <%- user.lastName %>
+                                </h4>
+                                <p class="text-dark"><span>
+                                        <%-"@" + user.username %>
+                                    </span></p>
+                            </div>
+                        </div>
+                        <div class=" user-bio mt-3">
+                            <h5 class="text-center"><em>Bio</em></h5>
+                            <div class="p-4 rounded shadow-sm bg-light">
+                                <p class="font-italic mb-0">
+                                    <%- user.bio %>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    <div class="d-flex flex-column media align-items-center profile-head">
-                        <img src="<%= user.img.profile %>" height="150" width="150" style="object-fit: cover;"
-                            class="rounded-circle border border-5 border-white">
-                    </div>
-                    <div class="d-flex row mb-5 mt-4 user-info text-center">
-                        <div class="col d-flex flex-column justify-content-end media-body text-white mx-4 mb-2">
-                            <h4 class="text-dark mb-2">
-                                <%- user.firstName%>
-                                    <%- user.lastName %>
-                            </h4>
-                            <p class="text-dark"><span>
-                                    <%-"@" + user.username %>
-                                </span></p>
+                    <div class="col-7 overflow-y">
+                        <div class="pt-4 px-4 text-center recent-post mb-3">
+                            <h2 class="mb-0">Photos</h2>
                         </div>
-                    </div>
-                    <div class="px-4 py-3 user-bio">
-                        <h5 class="mb-3 text-center"><em>Bio</em></h5>
-                        <div class="p-4 rounded shadow-sm bg-light">
-                            <p class="font-italic mb-0">
-                                <%- user.bio %>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="py-4 px-4 mt-5 recent-post">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <h5 class="mb-0">Photos</h5><a href="#" class="btn btn-link text-muted">Show
-                                all</a>
-                        </div>
-                        <div class="row">
+                        <div class="row px-5 py-2">
                             <% post.forEach((post)=> { %>
                                 <% let userId=JSON.stringify(user._id), authorId=JSON.stringify(post.authorId); %>
                                     <% if(userId==authorId) {%>
-                                        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                                        <div class="col-5 mb-4">
                                             <div class="bg-white rounded shadow-sm">
                                                 <img src="<%- post.img%>" alt="" class="img-fluid card-img-top"
                                                     style="height: 12rem; width: 18rem; object-fit: cover;">
@@ -60,18 +68,20 @@
 
                                             <% }) %>
                                                 <!-- <div class="col-lg-6 mb-2 pl-lg-1"><img
-                                                            src="https://images.unsplash.com/photo-1493571716545-b559a19edd14?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
-                                                            alt="" class="img-fluid rounded shadow-sm"></div>
-                                                    <div class="col-lg-6 pr-lg-1 mb-2"><img
-                                                            src="https://images.unsplash.com/photo-1453791052107-5c843da62d97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-                                                            alt="" class="img-fluid rounded shadow-sm"></div>
-                                                    <div class="col-lg-6 pl-lg-1"><img
-                                                            src="https://images.unsplash.com/photo-1475724017904-b712052c192a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
-                                                            alt="" class="img-fluid rounded shadow-sm"></div> -->
+                                                                                        src="https://images.unsplash.com/photo-1493571716545-b559a19edd14?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                                                                        alt="" class="img-fluid rounded shadow-sm"></div>
+                                                                                <div class="col-lg-6 pr-lg-1 mb-2"><img
+                                                                                        src="https://images.unsplash.com/photo-1453791052107-5c843da62d97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+                                                                                        alt="" class="img-fluid rounded shadow-sm"></div>
+                                                                                <div class="col-lg-6 pl-lg-1"><img
+                                                                                        src="https://images.unsplash.com/photo-1475724017904-b712052c192a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                                                                        alt="" class="img-fluid rounded shadow-sm"></div> -->
 
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>

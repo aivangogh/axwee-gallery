@@ -7,14 +7,14 @@
                     <!-- Carousel wrapper -->
                     <div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel">
                         <!-- Indicators -->
-                        <div class="carousel-indicators">
+                        <!-- <div class="carousel-indicators">
                             <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="0"
                                 class="active" aria-current="true" aria-label="Slide 1"></button>
                             <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="1"
                                 aria-label="Slide 2"></button>
                             <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="2"
                                 aria-label="Slide 3"></button>
-                        </div>
+                        </div> -->
 
                         <!-- Inner -->
                         <div class="carousel-inner">
@@ -29,16 +29,16 @@
                                         </h5>
                                         <p>
                                             <% postUser.forEach(user=> {%>
-                                                <% let userId=JSON.stringify(user._id),
-                                                    authorId=JSON.stringify(post.authorId) %>
-                                                    <% if(userId==authorId) {%>
-                                                        <p><small>by&nbsp;</small></em>
-                                                            <strong>
-                                                                <%- `${user.firstName} ${user.lastName}` %>
-                                                            </strong>
-                                                        </p>
-                                                        <% }%>
-                                                            <%}) %>
+                                                <% let userId=JSON.stringify(user._id) %>
+                                                    <% let authorId=JSON.stringify(post.authorId) %>
+                                                        <% if(userId==authorId) {%>
+                                                            <p><small>by&nbsp;</small></em>
+                                                                <strong>
+                                                                    <%- `${user.firstName} ${user.lastName}` %>
+                                                                </strong>
+                                                            </p>
+                                                            <% }%>
+                                                                <%}) %>
                                         </p>
                                     </div>
                                 </div>
@@ -48,7 +48,7 @@
                         <!-- Inner -->
 
                         <!-- Controls -->
-                        <button class="carousel-control-prev" type="button" data-mdb-target="#carouselBasicExample"
+                        <!-- <button class="carousel-control-prev" type="button" data-mdb-target="#carouselBasicExample"
                             data-mdb-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
@@ -57,19 +57,23 @@
                             data-mdb-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
-                        </button>
+                        </button> -->
                     </div>
                     <!-- Carousel wrapper -->
                 </div>
             </div>
             <div class="col-4 d-flex align-items-center">
                 <div class="container">
-                    <div class="row d-flex flex-column align-items-center justify-content-center">
-                        <div class="col-md-6 mb-5 m-auto">
-                            <h1 class="my-4 display-6 text-center">Upload your works.</h1>
-                            <a href="/post" class="btn btn-primary btn-lg btn-rounded">Create New Post</a>
+                    <div class="row d-flex flex-column">
+                        <div class="col-6 mb-5 w-100">
+                            <div class="my-4 px-4">
+                                <h1 class=" display-6">Upload your creative work.</h1>
+                            </div>
+                            <div class="px-4">
+                                <a href="/post" class="btn btn-primary btn-lg btn-rounded">Create New Post</a>
+                            </div>
                         </div>
-                        <div class="col mt-5 px-4 d-flex flex-column align-items-center justify-content-center">
+                        <div class="col px-4 mt-5 d-flex flex-column align-items-center justify-content-center">
                             <p>Explore the community of <strong>Axwee Gallery</strong></p>
                             <a role="button" href="/gallery" class="btn btn-outline-dark btn-rounded">Discover
                                 more</a>

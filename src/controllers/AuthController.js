@@ -35,7 +35,7 @@ exports.login = (req, res, next) => {
  *
  */
 exports.register = (req, res) => {
-  const name = req.body.name;
+  let errors = [];
   // getting site key from client side
   const response_key = req.body['g-recaptcha-response'];
   // Put secret key here, which we get from google console
@@ -65,7 +65,6 @@ exports.register = (req, res) => {
           password,
           confirmPassword,
         } = req.body;
-        let errors = [];
 
         if (password != confirmPassword) {
           errors.push({ msg: 'Password does not match.' });
@@ -92,7 +91,6 @@ exports.register = (req, res) => {
               username,
               email,
               phone,
-              password,
             });
           } else {
             const newUser = new User({
@@ -122,19 +120,21 @@ exports.register = (req, res) => {
         }
       } else {
         // if captcha is not verified
-        return res.send({ response: 'Failed' });
+        errors.push({ msg: 'Missing captcha' });
+        res.render('register', {
+          errors,
+          firstName,
+          lastName,
+          username,
+          email,
+          phone,
+        });
       }
     })
     .catch((error) => {
-      req.flash('error_msg', 'Something went wrong. Please try again.');
+      errors.push({ msg: 'Missing captcha' });
       res.render('register', {
         errors,
-        firstName,
-        lastName,
-        username,
-        email,
-        phone,
-        password,
       });
     });
 };
