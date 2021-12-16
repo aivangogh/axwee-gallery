@@ -33,6 +33,17 @@ exports.uploadPost = async (req, res, next) => {
 
 // Get All Post
 exports.getAllPost = (req, res) => {
+  try {
+    Post.find({}, function (err, users) {
+      return res.send(users);
+    });
+  } catch (error) {
+    return apiResponse.ErrorResponse(res, error.message);
+  }
+};
+
+// Render All Post
+exports.renderAllPost = (req, res) => {
   Post.find()
     .sort({ createdAt: -1 })
     .exec((err, post) => {
@@ -62,32 +73,30 @@ exports.getAllPost = (req, res) => {
 
 // Get All Post
 exports.getFeaturedPost = (req, res) => {
-  Post.find()
-    .sort({ createdAt: -1 })
-    .exec((err, post) => {
-      let dbPost = [];
-      if (err) {
-        console.log(err);
-        res.status(500).send('An error occurred', err);
-      } else {
-        post.map((data, err) => {
-          dbPost.push(data.authorId);
-        });
+  Post.find((err, post) => {
+    let dbPost = [];
+    if (err) {
+      console.log(err);
+      res.status(500).send('An error occurred', err);
+    } else {
+      post.map((data, err) => {
+        dbPost.push(data.authorId);
+      });
 
-        User.find({ _id: { $in: dbPost } })
-          .then((user) => {
-            res.locals.session.isLoggedIn = true;
-            res.render('home', {
-              user: req.user,
-              post: post,
-              postUser: user,
-            });
-          })
-          .catch((err) => {
-            console.log(err);
+      User.find({ _id: { $in: dbPost } })
+        .then((user) => {
+          res.locals.session.isLoggedIn = true;
+          res.render('home', {
+            user: req.user,
+            post: post,
+            postUser: user,
           });
-      }
-    });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  });
 };
 
 // route that handles edit view

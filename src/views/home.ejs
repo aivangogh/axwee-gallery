@@ -6,59 +6,57 @@
                     <h1 class="text-center display-5 my-4">Featured</h1>
                     <!-- Carousel wrapper -->
                     <div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel">
-                        <!-- Indicators -->
-                        <!-- <div class="carousel-indicators">
-                            <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="0"
-                                class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="1"
-                                aria-label="Slide 2"></button>
-                            <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="2"
-                                aria-label="Slide 3"></button>
-                        </div> -->
 
-                        <!-- Inner -->
                         <div class="carousel-inner">
-                            <% const random=Math.floor(Math.random() * post.length) + 1; %>
-                                <% const featured=random %>
-                                    <!-- Single item -->
-                                    <div class="carousel-item active">
-                                        <img src="<%- post[featured].img %>" class="d-block w-100"
-                                            alt="<%- post.title %>" style="height: 25rem; object-fit: cover;" />
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <h5>
-                                                <%- post[featured].title %>
-                                            </h5>
-                                            <p>
-                                                <% postUser.forEach(user=> {%>
-                                                    <% let userId=JSON.stringify(user._id) %>
-                                                        <% let authorId=JSON.stringify(post[featured].authorId) %>
-                                                            <% if(userId==authorId) {%>
-                                                                <p><small>by&nbsp;</small></em>
-                                                                    <strong>
-                                                                        <%- `${user.firstName} ${user.lastName}` %>
-                                                                    </strong>
-                                                                </p>
-                                                                <% }%>
-                                                                    <%}) %>
-                                            </p>
+                            <% if(post.length> 0){ %>
+                                <% const random=Math.floor(Math.random() * post.length); %>
+                                    <% const featured=random %>
+                                        <!-- Single item -->
+                                        <div class="carousel-item active">
+                                            <img src="<%- post[featured].img %>" class="d-block
+                                                alt=" <%- post.title %>" style="height: 25rem; width: 50rem;
+                                            object-fit: cover;" />
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5>
+                                                    <%- post[featured].title %>
+                                                </h5>
+                                                <p>
+                                                    <% postUser.forEach(user=> {%>
+                                                        <% let userId=JSON.stringify(user._id) %>
+                                                            <% let authorId=JSON.stringify(post[featured].authorId) %>
+                                                                <% if(userId==authorId) {%>
+                                                                    <p><small>by&nbsp;</small></em>
+                                                                        <strong>
+                                                                            <%- `${user.firstName} ${user.lastName}` %>
+                                                                        </strong>
+                                                                    </p>
+                                                                    <% }%>
+                                                                        <%}) %>
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
+                                        <% } else { %>
+                                            <div class="carousel-item active">
+                                                <img src="img/bg/featured.jpg" class="d-block"
+                                                    style="height: 25rem; width: 50rem; object-fit: cover;" />
+                                                <div class="carousel-caption d-none d-md-block">
+                                                    <h5>
+                                                        The Starry Night
+                                                    </h5>
+                                                    <p>
 
+                                                    <p><small>by&nbsp;</small></em>
+                                                        <strong>
+                                                            Vincent Van Gogh
+                                                        </strong>
+                                                    </p>
+
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <% } %>
 
                         </div>
-                        <!-- Inner -->
-
-                        <!-- Controls -->
-                        <!-- <button class="carousel-control-prev" type="button" data-mdb-target="#carouselBasicExample"
-                            data-mdb-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-mdb-target="#carouselBasicExample"
-                            data-mdb-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button> -->
                     </div>
                     <!-- Carousel wrapper -->
                 </div>
