@@ -18,31 +18,32 @@
 
                         <!-- Inner -->
                         <div class="carousel-inner">
-                            <% post.forEach((post)=> { %>
-                                <!-- Single item -->
-                                <div class="carousel-item active">
-                                    <img src="<%- post.img %>" class="d-block w-100" alt="<%- post.title %>"
-                                        style="height: 25rem; object-fit: cover;" />
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>
-                                            <%- post.title %>
-                                        </h5>
-                                        <p>
-                                            <% postUser.forEach(user=> {%>
-                                                <% let userId=JSON.stringify(user._id) %>
-                                                    <% let authorId=JSON.stringify(post.authorId) %>
-                                                        <% if(userId==authorId) {%>
-                                                            <p><small>by&nbsp;</small></em>
-                                                                <strong>
-                                                                    <%- `${user.firstName} ${user.lastName}` %>
-                                                                </strong>
-                                                            </p>
-                                                            <% }%>
-                                                                <%}) %>
-                                        </p>
+                            <% const random=Math.floor(Math.random() * post.length) + 1; %>
+                                <% const featured=random %>
+                                    <!-- Single item -->
+                                    <div class="carousel-item active">
+                                        <img src="<%- post[featured].img %>" class="d-block w-100"
+                                            alt="<%- post.title %>" style="height: 25rem; object-fit: cover;" />
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>
+                                                <%- post[featured].title %>
+                                            </h5>
+                                            <p>
+                                                <% postUser.forEach(user=> {%>
+                                                    <% let userId=JSON.stringify(user._id) %>
+                                                        <% let authorId=JSON.stringify(post[featured].authorId) %>
+                                                            <% if(userId==authorId) {%>
+                                                                <p><small>by&nbsp;</small></em>
+                                                                    <strong>
+                                                                        <%- `${user.firstName} ${user.lastName}` %>
+                                                                    </strong>
+                                                                </p>
+                                                                <% }%>
+                                                                    <%}) %>
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                                <% }) %>
+
 
                         </div>
                         <!-- Inner -->

@@ -20,7 +20,7 @@ exports.uploadPost = async (req, res, next) => {
       })
       .catch((err) => {
         req.flash('error_msg', 'Post failed. Please try again.');
-        res.render('/gallery', {
+        res.render('post', {
           title: req.body.title,
           desc: req.body.caption,
           img: req.file.path,
@@ -98,24 +98,34 @@ exports.getPost = async (req, res) => {
 
 //route to handle updates
 exports.updatePost = async (req, res) => {
-  req.post = await Post.findById(req.params.id);
-  let post = req.post;
-  blog.title = req.body.title;
-  blog.author = req.body.author;
-  blog.description = req.body.description;
+  const path = repath(req.file.path);
+  const post = {
+    title: req.body.title,
+    desc: req.body.desc,
+    authorId: req.user._id,
+    img: path,
+  };
 
   try {
-    blog = await post.save();
-    //redirect to the view route
-    res.redirect(`/post/${post.slug}`);
+    User.findByIdAndUpdate({ _id: req.params.id }, post, (err, post) => {
+      if (err) {
+        req.flash('error_msg', 'Error occured. Please try again.');
+        res.render('post', {
+          title: req.body.title,
+          desc: req.body.caption,
+          img: req.file.path,
+        });
+      } else {
+        res.redirect('gallery');
+      }
+    });
   } catch (error) {
-    console.log(error);
-    res.redirect(`/seblogs/edit/${post.id}`, { post: post });
+    return apiResponse.ErrorResponse(res, error.message);
   }
 };
 
 ///route to handle delete
 exports.deletePost = async (req, res) => {
   await Post.findByIdAndDelete(req.params.id);
-  res.redirect('/');
+  res.redirect('/gallery');
 };

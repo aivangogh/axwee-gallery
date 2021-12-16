@@ -13,7 +13,10 @@ router.get('/', PostController.getAllPost);
 // Get file
 router.get('/:postId', PostController.getPost);
 
+// Update file
+router.post('/:postId', PostController.updatePost);
+
 // Delete file
-router.delete('/:postId', PostController.deletePost);
+router.get('/:postId', PostController.deletePost);
 
 module.exports = router;

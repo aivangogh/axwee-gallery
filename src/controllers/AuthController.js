@@ -1,6 +1,6 @@
 const User = require('../models/UserModel');
 const bcrypt = require('bcrypt');
-const { check, validationResult } = require('express-validator');
+const { validationResult } = require('express-validator');
 const passport = require('passport');
 const fetch = require('isomorphic-fetch');
 
@@ -102,8 +102,10 @@ exports.register = (req, res) => {
               phone,
               password,
             });
+
             bcrypt.hash(newUser.password, 10, (err, hash) => {
               if (err) throw err;
+
               newUser.password = hash;
               newUser
                 .save()

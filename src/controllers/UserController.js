@@ -1,5 +1,6 @@
 const User = require('../models/UserModel');
 const Post = require('../models/PostModel');
+const bcrypt = require('bcrypt');
 const apiResponse = require('../helpers/authResponse');
 const { repath } = require('../utils/repath');
 
@@ -35,32 +36,34 @@ exports.getUser = (req, res) => {
 
 // Get All User Post
 exports.getAllUserPost = (req, res) => {
-  Post.find()
-    .sort({ createdAt: -1 })
-    .exec((err, post) => {
-      let dbPost = [];
-      if (err) {
-        console.log(err);
-        res.status(500).send('An error occurred', err);
-      } else {
-        console.log(post);
-        post.map((data, err) => {
-          dbPost.push(data.authorId);
-        });
-
-        User.find({ _id: { $in: dbPost } })
-          .then((user) => {
-            res.render('profile', {
-              user: req.user,
-              post: post,
-              postUser: user,
-            });
-          })
-          .catch((err) => {
-            console.log(err);
+  try {
+    Post.find()
+      .sort({ createdAt: -1 })
+      .exec((err, post) => {
+        let dbPost = [];
+        if (err) {
+          res.status(500).send('An error occurred', err);
+        } else {
+          post.map((data, err) => {
+            dbPost.push(data.authorId);
           });
-      }
-    });
+
+          User.find({ _id: { $in: dbPost } })
+            .then((user) => {
+              res.render('profile', {
+                user: req.user,
+                post: post,
+                postUser: user,
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      });
+  } catch (err) {
+    return apiResponse.ErrorResponse(res, error.message);
+  }
 };
 
 // Create new user
@@ -129,11 +132,9 @@ exports.updateUserInfo = (req, res) => {
     User.findByIdAndUpdate({ _id: req.params.id }, user, (err, user) => {
       if (err) {
         req.flash('error_msg', 'Error occured. Please try again.');
-        console.log(`Error`);
         res.redirect('/edit-info');
       } else {
         req.flash('success_msg', 'Personal Info changed.');
-        console.log(`Success`);
         res.redirect('/edit-info');
       }
     });
@@ -144,7 +145,6 @@ exports.updateUserInfo = (req, res) => {
 
 // Upload Post
 exports.uploadPost = async (req, res, next) => {
-  console.log(req.file);
   // console.log(request.body);
   let post = new Post({
     title: req.body.title,
@@ -174,48 +174,55 @@ exports.uploadPost = async (req, res, next) => {
 
 // Update specific user password
 exports.updatePassword = (req, res) => {
-  const user = new User({
-    password: req.body.password,
-  });
+  let errors = [];
 
-  if (password != re) {
-    res.render('register', {
-      errors,
-      firstName,
-      lastName,
-      username,
-      email,
-      phone,
-    });
-  }
+  if (req.body.newPassword != req.body.confirmPassword) {
+    errors.push({ msg: 'Password does not match.' });
+    res.redirect('/change-password');
+  } else {
+    const userPassword = {
+      password: req.body.newPassword,
+    };
+    // Match password
+    bcrypt.compare(
+      req.body.currentPassword,
+      req.user.password,
+      (err, isMatch) => {
+        bcrypt.hash(userPassword.password, 10, (err, hash) => {
+          if (err) throw err;
 
-  bcrypt.hash(newUser.password, 10, (err, hash) => {
-    if (err) throw err;
-    newUser.password = hash;
-    newUser
-      .save()
-      .then((user) => {
-        req.flash('success_msg', 'You are now registered and can log in');
-        res.redirect('/login');
-      })
-      .catch((err) => console.log(err));
-  });
+          userPassword.password = hash;
+          try {
+            User.findByIdAndUpdate(
+              { _id: req.params.id },
+              userPassword,
+              (err, user) => {
+                if (err) {
+                  req.flash('error_msg', 'Error occured. Please try again.');
+                  res.redirect('/change-password');
+                }
 
-  try {
-    User.updateOne({ _id: req.params.id }, user)
-      .then(() => {
-        req.flash('success_msg', 'Personal Info changed.');
-        res.redirect('/edit-info');
-      })
-      .catch((error) => {
-        req.flash('error_msg', 'Error occured. Please try again.');
-        res.render('/edit-info', {
-          user: req.user,
+                if (isMatch) {
+                  req.flash('success_msg', 'Password changed.');
+                  res.redirect('/change-password');
+                } else {
+                  req.flash(
+                    'error_msg',
+                    'Your current password does not match'
+                  );
+                  res.redirect('/change-password');
+                }
+              }
+            );
+          } catch (err) {
+            req.flash('error_msg', 'Error occured. Please try again.');
+            console.log('error occured 2');
+            res.redirect('/change-password');
+          }
         });
-      });
-  } catch (error) {
-    return apiResponse.ErrorResponse(res, error.message);
-  }
+      }
+    );
+  } // end of else statement
 };
 
 // Delete specific user
@@ -234,6 +241,7 @@ exports.deleteUser = (req, res) => {
       }
     );
   } catch (error) {
-    return apiResponse.ErrorResponse(res, error.message);
+    req.flash('error_msg', 'Error occured. Please try again.');
+    res.redirect('/settings');
   }
 };
