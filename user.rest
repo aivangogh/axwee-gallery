@@ -1,0 +1,50 @@
+
+GET http://localhost:3000/api/user/
+
+# Authorization: Bearer 
+
+###
+
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "firstName": "Ivan",
+    "lastName": "Gemota",
+    "username": "ivangemota",
+    "email": "ivangemota143@gmail.com",
+    "phone": "09652158043",
+    "password": "qwerty123"
+}
+
+###
+
+POST http://localhost:3000/api/user/
+Content-Type: application/json
+
+{
+    "firstName": "Karl",
+    "lastName": "Nayum",
+    "username": "karlnayum66",
+    "email": "karlnayum66@gmail.com",
+    "phone": "09652158043",
+    "password": "qwerty123"
+}
+
+###
+
+PUT http://localhost:3000/api/user/61ab37fb9c291133aeda7d39
+Content-Type: application/json
+
+{
+    "firstName": "Karla",
+    "lastName": "Nayum",
+    "username": "karlnayum66",
+    "email": "karlnayum66@gmail.com",
+    "phone": "09652158043",
+    "password": "qwerty123"
+}
+
+###
+
+DELETE http://localhost:3000/api/user/61b5a845c16aec271450303b

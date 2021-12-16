@@ -31,7 +31,7 @@ router.get('/register', forwardAuthenticated, (req, res) => {
 router.get('/profile', ensureAuthenticated, UserController.getAllUserPost);
 
 // Gallery
-router.get('/gallery', ensureAuthenticated, PostController.getAllPost);
+router.get('/gallery', ensureAuthenticated, PostController.renderAllPost);
 
 // About
 router.get('/about', ensureAuthenticated, (req, res) => {

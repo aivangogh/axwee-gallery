@@ -5,10 +5,13 @@ const PostController = require('../../controllers/PostController');
 const router = express.Router();
 
 // Upload Post
-router.post('/', upload.single('post'), PostController.uploadPost);
+router.post('/upload', upload.single('post'), PostController.uploadPost);
 
 // Get all image
 router.get('/', PostController.getAllPost);
+
+// Get all image
+router.get('/renderAllPost', PostController.renderAllPost);
 
 // Get file
 router.get('/:postId', PostController.getPost);
